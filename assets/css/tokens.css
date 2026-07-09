@@ -1,0 +1,151 @@
+/* ==========================================================================
+   Design tokens — Great Learners Montessori Nursery, Golders Green NW11
+   (one branch of the Learners Montessori family; this site is scoped to
+   the Golders Green / The Riding location only — see BUILD_BRIEF.md)
+
+   Palette: "morning sky" — a bright cerulean sky-blue as the primary hue,
+   sampled in spirit from the royal-blue play chairs, dress-up aprons and
+   water-play tubs that recur through every one of Great Learners' own
+   classroom photos, paired with a warm burnt-terracotta accent lifted
+   directly from the real building the nursery occupies (the golders-green
+   brick gable of St Michael's, in exterior-building.jpg) and from the warm
+   beech-wood shelving in every classroom. Chosen to read bright, open-air
+   and optimistic (skies, morning circle-time in the garden) rather than
+   the deep navy the parent brand's own shield logo defaults to — this is
+   a distinct redesign identity for the Golders Green branch, not a copy
+   of the existing site's colours.
+
+   Distinct from every other project in this consultancy's portfolio
+   (checked against sibling tokens.css files present at build time):
+   - No dark navy/indigo (cobblers-and-keys ~213°, nw3-chiropractic
+     ~232-240°) — this sky-blue sits at hue ~197°, meaningfully brighter/
+     lighter (L 37%) than either, not a dark UI anchor colour.
+   - No deep teal (hampstead-chiropractic ~185°, je-sports-therapy
+     ~183-184°) — again a ~12-15° hue gap plus much higher lightness here.
+   - No moss/fern/bottle green (casa-dei-bambini-montessori ~100°,
+     lamats-vintage ~152°) and no green at all as a named token.
+   - No amethyst/violet (dental-perfection ~276°).
+   - No red/crimson/rose/mauve/plum (quigley-butchers 0°, royal-fabrics
+     ~340-344°, mad-lillies ~350°, reichs-caterers ~333°, stitches-
+     tailoring ~305°) — the terracotta accent here sits at hue ~15°, an
+     orange-leaning burnt clay, not a red or pink.
+   - Gold/honey/brass (casa-dei-bambini honey ~33°, beehive-brookland
+     amber ~40°, plus several siblings' brass trims) is deliberately NOT
+     used here — this build is a clean two-hue system (sky + terracotta)
+     rather than adding a third accent into that already-crowded band.
+
+   Contrast notes (computed via the WCAG relative-luminance formula, not
+   eyeballed — AA thresholds: 4.5:1 normal text, 3:1 large text/UI):
+   - --color-sky (#1F7A9E): 4.57:1 on paper, 4.84:1 on white surface —
+     clears AA for normal text and as a solid button fill under white
+     text (white-on-sky is 4.84:1). Safe for headings, links, buttons.
+   - --color-sky-deep (#14536C): 7.98:1 on paper, 8.46:1 white-on-fill —
+     dark sections, footer, nav, hover/active state.
+   - --color-sky-pale (#DCEEF3): pale tint for chips/badges only — 4.05:1
+     against plain --color-sky, so don't set sky text on sky-pale without
+     rechecking; ink/sky-deep both clear 12:1+ on it.
+   - --color-terracotta (#D8663F) is DECORATIVE / LARGE-TEXT-ONLY on light
+     backgrounds — 3.36:1 on paper, 3.56:1 white-on-fill — fails AA normal
+     text. Use --color-terracotta-deep for any small text, link, or solid
+     button fill that needs body-text-safe contrast.
+   - --color-terracotta-deep (#9C4426): 6.07:1 on paper, 6.43:1 white-on-
+     fill — safe for small text and button fills.
+   - --color-ink (#1E2A32) / --color-ink-soft (#56636B): 13.84:1 / 5.84:1
+     on paper — safe for body copy at both weights.
+   ========================================================================== */
+
+:root {
+  /* ---- Colors: core ---- */
+  --color-sky: #1F7A9E;           /* primary — bright cerulean sky-blue */
+  --color-sky-deep: #14536C;      /* dark sections/footer/nav, hover/active */
+  --color-sky-pale: #DCEEF3;      /* pale tint for chips/badges/backgrounds — not for text alone */
+
+  --color-terracotta: #D8663F;    /* accent — DECORATIVE/LARGE-TEXT ONLY on light bg, see contrast note */
+  --color-terracotta-deep: #9C4426; /* text-safe terracotta — small text, links, button fills */
+  --color-terracotta-pale: #F6DFD2; /* pale tint for chips/badges — not for text */
+
+  /* ---- Colors: neutrals ---- */
+  --color-paper: #FBF8F3;         /* page background — warm ivory */
+  --color-paper-dim: #F1EAE0;     /* secondary panel background, card fills */
+  --color-surface: #FFFFFF;       /* card surface */
+  --color-ink: #1E2A32;           /* body text — blue-charcoal, ties to sky hue family */
+  --color-ink-soft: #56636B;      /* secondary text — 5.84:1 on paper */
+  --color-line: #E3D9CB;          /* hairline borders — decorative only */
+  --color-line-strong: #CBBBA6;
+  --color-white: #FFFFFF;
+
+  /* Computed hover-fill: shared dark accent buttons derived live from
+     --color-sky via color-mix rather than a separate hand-maintained
+     token — see main.css .btn rules. */
+  --hover-fill: color-mix(in oklch, var(--color-sky) 72%, black);
+
+  /* Semantic aliases */
+  --color-bg: var(--color-paper);
+  --color-text: var(--color-ink);
+  --color-text-soft: var(--color-ink-soft);
+  --color-primary: var(--color-sky);
+  --color-primary-deep: var(--color-sky-deep);
+  --color-accent: var(--color-terracotta);
+  --color-accent-deep: var(--color-terracotta-deep);
+
+  /* ---- Typography ----
+     Google Fonts CDN (accepted convention elsewhere in this portfolio —
+     dr-li-acupuncture-clinic, fitness-finetic, hampstead-practice,
+     i-love-pilates, etc. — with a system-font fallback stack so the page
+     still renders correctly if the CDN request fails). Fredoka (rounded,
+     warm, friendly geometric sans) for display/headings — evokes a
+     children's-education brand without tipping into twee, and echoes the
+     hand-drawn marker-style headings on the nursery's own current site
+     without literally copying its typeface. Nunito Sans for body/UI: a
+     humanist sans with soft, rounded terminals that pairs cleanly with
+     Fredoka rather than clashing. Neither font is used elsewhere in this
+     portfolio yet. */
+  --font-display: "Fredoka", ui-rounded, "SF Pro Rounded", "Baloo 2", "Segoe UI", -apple-system, BlinkMacSystemFont, "Helvetica Neue", Arial, sans-serif;
+  --font-body: "Nunito Sans", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+  --font-sans: "Nunito Sans", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+
+  --fs-h1: clamp(2.35rem, 3.6vw + 1rem, 3.75rem);
+  --fs-h2: clamp(1.7rem, 2vw + 1rem, 2.4rem);
+  --fs-h3: clamp(1.2rem, 1vw + 1rem, 1.4rem);
+  --fs-lead: clamp(1.08rem, 0.6vw + 0.9rem, 1.25rem);
+  --fs-body: 1.05rem;
+  --fs-small: 0.875rem;
+  --fs-eyebrow: 0.8rem;
+
+  --lh-tight: 1.15;
+  --lh-body: 1.65;
+
+  /* ---- Spacing scale ---- */
+  --space-1: 0.5rem;
+  --space-2: 1rem;
+  --space-3: 1.5rem;
+  --space-4: 2.25rem;
+  --space-5: 3.5rem;
+  --space-6: 5.5rem;
+  --space-7: 8rem;
+
+  /* ---- Layout ---- */
+  --container-width: 1200px;
+  --container-pad: clamp(1.25rem, 4vw, 3rem);
+  --radius-sm: 6px;
+  --radius-md: 14px;
+  --radius-lg: 26px;
+
+  /* ---- Shadows (warm, low-contrast — not cool/violet-toned) ---- */
+  --shadow-card: 0 14px 32px -18px rgba(30, 42, 50, 0.24);
+  --shadow-card-hover: 0 22px 44px -16px rgba(30, 42, 50, 0.32);
+  --shadow-soft: 0 8px 20px -12px rgba(30, 42, 50, 0.18);
+
+  /* ---- Motion ---- */
+  --ease-out: cubic-bezier(0.22, 1, 0.36, 1);
+  --ease-key: cubic-bezier(0.16, 0.84, 0.44, 1);
+  --dur-fast: 220ms;
+  --dur-med: 550ms;
+  --dur-slow: 1100ms;
+
+  /* Breakpoints (reference only, used in comments): 640 / 900 / 1200 */
+}
+
+@view-transition {
+  navigation: auto;
+}
